@@ -1,0 +1,41 @@
+server:
+  port: 9090
+spring:
+  application:
+    name: demo_login_auth_final
+  datasource:
+    username: sa
+    password: Phattran.123
+    driver-class-name: com.microsoft.sqlserver.jdbc.SQLServerDriver
+    url: jdbc:sqlserver://localhost:1433;databaseName=LoginAuthFinal;TrustServerCertificate=true
+  jpa:
+    hibernate:
+      ddl-auto: create
+    properties:
+      hibernate:
+        format_sql: true
+    show-sql: true
+  security:
+    oauth2:
+      client:
+        registration:
+          google:
+            clientId: 915802494373-qo0dcq94ne13eggj5tpalc7dnah6p897.apps.googleusercontent.com
+            clientSecret: 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
+            redirectUri: "{baseUrl}/oauth2/callback/{registrationId}"
+            scope:
+              - email
+              - profile
+app:
+  auth:
+    token_secret: 04ca023b39512e46d0c2cf4b48d5aac61d34302994c87ed4eff225dcf3b0a218739f3897051a057f9b846a69ea2927a587044164b7bae5e1306219d50b588cb1
+    refresh_token_expired: 864000000 #7 day
+    access_token_expired: 30000
+  oauth2:
+    authorized_redirec_uris:
+      - http://localhost:5000/oauth2/redirect
+  cors:
+    max_age_secs: 3600
+    allowed_origins:
+      - http://localhost:5000
+      - http://localhost:9090
